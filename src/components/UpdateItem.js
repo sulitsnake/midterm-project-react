@@ -42,7 +42,7 @@ function UpdateItem({ inventory, onUpdateItem }) {
 
   return (
     <div>
-      {message && <Alert variant="danger">{message}</Alert>}
+      {message && <Alert variant="info">{message}</Alert>}
       <Form>
         <Form.Group controlId="formItemId">
           <Form.Label>ID</Form.Label>
