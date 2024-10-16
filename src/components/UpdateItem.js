@@ -7,7 +7,29 @@ function UpdateItem({ inventory, onUpdateItem }) {
   const [newValue, setNewValue] = useState('');
   const [message, setMessage] = useState('');
 
+  const isAlphanumeric = (str) => /^[a-zA-Z0-9]+$/.test(str); //regex for ID
+
   const handleUpdateItem = () => {
+    if (!isAlphanumeric(itemId)) {
+      setMessage('ID should only contain letters (A-Z) and numbers (0-9).');
+      return; 
+    } //regex validation
+
+    //checks if new value isn't null or empty.
+    if (newValue === '' || newValue === null || isNaN(newValue)) {
+      setMessage('Please enter a valid value.');
+      return;
+    }
+
+
+    /*validation for negative price or quantity*/
+    if (field === 'quantity' || field === 'price') {
+      if (newValue < 0) {
+        setMessage(`${field.charAt(0).toUpperCase() + field.slice(1)} cannot be negative.`);
+        return;
+      }
+    }
+
     const item = inventory.find(item => item.id === itemId);
     if (item) {
       const oldValue = item[field];
@@ -20,7 +42,7 @@ function UpdateItem({ inventory, onUpdateItem }) {
 
   return (
     <div>
-      {message && <Alert variant="success">{message}</Alert>}
+      {message && <Alert variant="danger">{message}</Alert>}
       <Form>
         <Form.Group controlId="formItemId">
           <Form.Label>ID</Form.Label>

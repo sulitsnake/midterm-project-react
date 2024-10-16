@@ -1,0 +1,98 @@
+@import url('https://fonts.googleapis.com/css2?family=Jersey+15&display=swap');
+/*Jersey 15*/
+
+
+body {
+  font-family: "Jersey 15", sans-serif !important;
+  margin: 0;
+  padding: 0;
+  height: 100vh;
+  display: flex;
+  flex-direction: column; 
+  justify-content: flex-start; 
+  align-items: center;
+  background-image: url('/public/background.jpg'); 
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+
+.header-container {
+  width: 100vw; 
+  text-align: center;
+  padding: 20px 0; 
+  background-image: url('/public/headerstorage.jpg');
+  background-size: cover; 
+  background-repeat: no-repeat; 
+  background-position: center; 
+  height: 100px; 
+  position: relative; 
+
+}
+
+.header {
+  font-size: 3rem;
+  font-weight: bold;
+  color: white;
+  margin: 0;
+}
+
+.main-container {
+  width: 80%;
+  max-height: max-content;
+  max-width: 1200px;
+  background-color: rgba(230, 230, 230, 0.9); 
+  padding: 20px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  text-align: center;
+  margin: 20px auto; 
+  position: relative;
+}
+
+input[type="text"], input[type="number"]select {
+  border-radius: 0; 
+}
+
+
+form {
+  margin-top: 20px;
+}
+
+button {
+  border-radius: 0 !important;
+  margin-top: 20px;
+}
+
+
+/*styling for buttons*/
+.btn-primary {
+  background-color: #b56718!important; 
+  border-color: #6f3c08!important; 
+}
+.btn-primary:hover {
+  background-color: #d97821!important; 
+  border-color: #d97821; 
+}
+
+
+.nav-tabs .nav-link {
+  border-radius: 0 !important;
+  color: #333;
+  font-weight: bold;
+} 
+
+.nav-tabs .nav-link.active {
+  background-color: #b56718 !important;
+  color: #ffffff !important;
+} /*tab color change*/
+
+@media (max-width: 768px) {
+  .main-container {
+    width: 95%;
+    padding: 15px;
+  }
+
+  .header {
+    font-size: 1.5rem;
+  }
+}

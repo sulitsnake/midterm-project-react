@@ -1,11 +1,33 @@
 import React, { useState } from 'react';
 import { Form, Button, Alert } from 'react-bootstrap';
 
-function AddItem({ onAddItem }) {
+function AddItem({ onAddItem, inventory }) {
   const [newItem, setNewItem] = useState({ id: '', name: '', category: 'Clothing', quantity: '', price: '' });
   const [message, setMessage] = useState('');
 
   const handleAddItem = () => {
+
+    //checks if an ID already exists and prevents adding an item with a duplicate ID
+    const existingItem = inventory.find(item => item.id === newItem.id);
+    if (existingItem) {
+      setMessage('Item ID already exists! Please use a different ID.');
+      return; 
+    }
+
+    //regex for ID 
+    const idPattern = /^[a-zA-Z0-9]+$/;
+    if (!idPattern.test(newItem.id)) {
+      setMessage('Item ID can only contain letters (A-Z) and numbers (0-9).');
+      return; 
+    }
+
+    // validation to check if price or quantity isn't negative
+    if (newItem.quantity < 0 || newItem.price < 0) {
+      setMessage('Please enter a valid number for the Price and Quantity.');
+      return; 
+    }
+
+    // checking if all fields are filled
     if (newItem.id && newItem.name && newItem.quantity && newItem.price) {
       onAddItem(newItem);
       setMessage('Item added successfully!');
@@ -17,8 +39,10 @@ function AddItem({ onAddItem }) {
 
   return (
     <div>
-      {message && <Alert variant="success">{message}</Alert>}
+      {message && <Alert variant={message.includes('successfully') ? 'success' : 'danger'}>{message}</Alert>} 
+    
       <Form>
+
         <Form.Group controlId="formItemId">
           <Form.Label>ID</Form.Label>
           <Form.Control
@@ -27,7 +51,8 @@ function AddItem({ onAddItem }) {
             value={newItem.id}
             onChange={(e) => setNewItem({ ...newItem, id: e.target.value })}
           />
-        </Form.Group>
+        </Form.Group> 
+
         <Form.Group controlId="formItemName">
           <Form.Label>Name</Form.Label>
           <Form.Control

@@ -12,7 +12,6 @@ function DisplayItemsByCategory({ inventory }) {
 
   return (
     <div>
-      <h4>Display Items by Category</h4>
       <Form>
         <Form.Group controlId="formCategory">
           <Form.Label>Select Category</Form.Label>
